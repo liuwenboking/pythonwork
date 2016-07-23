@@ -2,21 +2,19 @@
 """
 Created on Thu Jul 21 19:55:46 2016
 
-@author: liuwenbo_wenbo
 """
 
 from matplotlib import pyplot as plt
 import numpy as np
-runNum = 0
 
 #拟合
 def fitting(A,B):
 	AATN = np.linalg.inv(A.T.dot(A))
 	fac = AATN.dot(A.T).dot(B)
-	print "fac",fac
 	result = A.dot(fac)
 	result = result.reshape(1,len(B))
 	return result
+
 def drawPoints(X,Y):
 	for i in range(len(X)):
 		plt.plot(X[i],Y[i]  ,marker='o')
@@ -42,17 +40,16 @@ def getLefRightSumByPos(d,pos):
 
 	return (leftSum,rightSum)
 
-def getMinDistancePoin(d,pos):
+def getMinDistancePoint(d,pos):
 	posNum = d[pos][0]
 	leftSum = 0
 	rightSum = 0
 	preDiff = None
 	prePos = pos
-	global runNum 
 	leftSum,rightSum = getLefRightSumByPos(d, pos)
 	diff = abs(leftSum - rightSum)
 	
-	while (diff < preDiff and pos >=0 and pos <len(d) and runNum<100):
+	while (diff < preDiff and pos >=0 and pos <len(d) ):
 		print "diff,pos,prepos,prediff,lefsum,rightsum", diff,pos,prePos,preDiff,leftSum,rightSum
 		preDiff = diff
 		prePos = pos
@@ -63,9 +60,7 @@ def getMinDistancePoin(d,pos):
 			pos += 1
 			leftSum,rightSum=getLefRightSumByPos(d, pos)
 		diff = abs(leftSum - rightSum)
-		
-		runNum += 1
-		
+
 	else:
 		return prePos
 
@@ -96,7 +91,8 @@ if __name__ =="__main__":
 		# drawPoints([P[0][0]], [P[0][1]])
 
 	d.sort()
-	pointPos = getMinDistancePoin(d, len(d) /2 )
+	# 获得距离各点最近的点，目前对于四边形如果投影点重合一半会有问题
+	pointPos = getMinDistancePoint(d, len(d) /2 )
 	drawPoints([d[pointPos][0]+X[0][0]],[d[pointPos][1]+result[0][0]])
 	plt.text(d[pointPos][0]+X[0][0], d[pointPos][1]+result[0][0], 'CenterPoint')
 	# 只考虑一维就可以
