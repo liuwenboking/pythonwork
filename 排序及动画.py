@@ -4,7 +4,7 @@ Created on Fri Jul 08 08:50:27 2016
 
 @author: samsung
 """
-get_ipython().magic(u'matplotlib qt4')
+# get_ipython().magic(u'matplotlib qt4')
 import numpy as np
 
 from matplotlib import pyplot as plt
