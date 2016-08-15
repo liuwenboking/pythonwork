@@ -10,9 +10,12 @@ def projection(A,B):
 	return A.dot(fac)
 
 if __name__ == "__main__":
+	# A = np.matrix([[4.0,2.0],[1.0,3.0]])
+	# B = np.matrix([[3.0],[2.0]])
 	A = np.array([[1],[2],[3]])
 	B = np.array([[1],[1],[1]])
 	P = projection(A,B)
+	print P
 	x = np.linspace(-0.5,1,10)
 
 	x.shape = (1,10)

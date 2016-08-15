@@ -57,10 +57,10 @@ def yield_fib(length):
 if __name__=="__main__":
 	# a=normal_fib(10000)
 	# b=yield_fib(10000)
-	# c = h()
-	# m = c.next()  #m 获取了yield 5 的参数值 5
-	# d = c.send('Fighting!')  #d 获取了yield 12 的参数值12
-	# print 'We will never forget the date', m, '.', d
+	c = h()
+	m = c.next()  #m 获取了yield 5 的参数值 5
+	d = c.send('Fighting!')  #d 获取了yield 12 的参数值12
+	print 'We will never forget the date', m, '.', d
 	A      = fib_iter()
 	result =[A.next() for i in xrange(1000)]
 	B      = fib_iter()
